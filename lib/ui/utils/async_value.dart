@@ -1,17 +1,17 @@
-sealed class AsyncValue<T> {
-  const AsyncValue();
-}
+enum AsyncValueState { loading, error, success }
 
-class AsyncLoading<T> extends AsyncValue<T> {
-  const AsyncLoading();
-}
+class AsyncValue<T> {
+  final T? data;
+  final Object? error;
+  final AsyncValueState state;
 
-class AsyncData<T> extends AsyncValue<T> {
-  final T data;
-  const AsyncData(this.data);
-}
+  AsyncValue._({this.data, this.error, required this.state});
 
-class AsyncError<T> extends AsyncValue<T> {
-  final String message;
-  const AsyncError(this.message);
+  factory AsyncValue.loading() => AsyncValue._(state: AsyncValueState.loading);
+
+  factory AsyncValue.success(T data) =>
+      AsyncValue._(data: data, state: AsyncValueState.success);
+
+  factory AsyncValue.error(Object error) =>
+      AsyncValue._(error: error, state: AsyncValueState.error);
 }

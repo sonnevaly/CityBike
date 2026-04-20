@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../model/pass/pass.dart';
+import '../../model/user/user.dart';
 
 class UserState extends ChangeNotifier {
-  Pass? _activePass;
-  Pass? get activePass => _activePass;
+  User? _user;
+  User? get user => _user;
 
-  bool get hasActivePass => _activePass != null;
-
-  void setActivePass(Pass pass) {
-    _activePass = pass;
+  void setUser(User user) {
+    _user = user;
     notifyListeners();
   }
 }
