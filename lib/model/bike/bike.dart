@@ -1,11 +1,6 @@
-// ============================================================
-// BIKE MODEL
-// Contains: Bike, BikeSlot, BikeType enum, BikeSlotStatus enum
-// ============================================================
+import '../enums.dart';
 
 enum BikeType { standard, electric }
-
-enum BikeSlotStatus { available, occupied, empty }
 
 class Bike {
   final String id;
@@ -21,8 +16,8 @@ class Bike {
 
 class BikeSlot {
   final int slotNumber;
-  final BikeType? bikeType; // null if slot is empty
-  final BikeSlotStatus status;
+  final BikeType? bikeType; // null if slot is empty/maintenance
+  final SlotStatus status;
 
   BikeSlot({
     required this.slotNumber,
@@ -30,7 +25,7 @@ class BikeSlot {
     required this.status,
   });
 
-  bool get isAvailable => status == BikeSlotStatus.available;
-  bool get isEmpty => status == BikeSlotStatus.empty;
-  bool get isOccupied => status == BikeSlotStatus.occupied;
+  bool get isAvailable => status == SlotStatus.available;
+  bool get isEmpty => status == SlotStatus.empty;
+  bool get isUnderMaintenance => status == SlotStatus.maintenance;
 }
