@@ -5,6 +5,7 @@ class Station {
   final double latitude;
   final double longitude;
   final int totalSlots;
+  final int avialableBikes;
 
   const Station({
     required this.id,
@@ -13,6 +14,6 @@ class Station {
     required this.latitude,
     required this.longitude,
     required this.totalSlots,
+    required this.avialableBikes,
   });
-
 }
