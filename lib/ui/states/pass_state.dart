@@ -1,5 +1,5 @@
+import 'package:citybike/model/pass/pass.dart';
 import 'package:flutter/material.dart';
-import '../../model/pass/pass.dart';
 
 class PassState extends ChangeNotifier {
   Pass? _activePass;
@@ -8,7 +8,6 @@ class PassState extends ChangeNotifier {
   Pass? get activePass => _activePass;
   bool get isPassActive => _isPassActive;
 
-  // Called when "Activate Pass" is clicked in the UI
   void activatePass(Pass plan) {
     _activePass = plan;
     _isPassActive = true;
