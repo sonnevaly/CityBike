@@ -14,5 +14,5 @@ class Station {
     required this.longitude,
     required this.totalSlots,
   });
-
+  
 }
