@@ -4,72 +4,84 @@ import 'package:citybike/model/station/station.dart';
 
 class StationDialog extends StatelessWidget {
   final Station station;
-
   const StationDialog({super.key, required this.station});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: const BoxDecoration(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(station.name, style: AppTextStyles.sectionHeader),
-          Text(station.address, style: AppTextStyles.body),
+          Text(station.name, style: AppTextStyles.sectionHeader.copyWith(fontSize: 16)),
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              const Icon(Icons.location_on_outlined, size: 14, color: AppColors.gray),
+              const SizedBox(width: 4),
+              Expanded(child: Text(station.address, style: AppTextStyles.body.copyWith(fontSize: 12))),
+            ],
+          ),
           const SizedBox(height: 20),
           
-          // Availability Box (Figma Style)
+          // Availability Info Box
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppColors.surface,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   backgroundColor: AppColors.primary,
-                  child: Icon(Icons.directions_bike, color: Colors.white),
+                  radius: 20,
+                  child: const Icon(Icons.directions_bike, color: Colors.white, size: 20),
                 ),
-                const SizedBox(width: 15),
+                const SizedBox(width: 12),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Member 3 used 'totalslots' in the model
-                    Text("${station.totalSlots} Slots", 
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    const Text("Total Capacity", style: TextStyle(color: AppColors.gray, fontSize: 12)),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(text: "10", style: TextStyle(color: AppColors.dark, fontWeight: FontWeight.bold, fontSize: 18)),
+                          TextSpan(text: "/${station.totalSlots}", style: TextStyle(color: AppColors.gray, fontSize: 14)),
+                        ],
+                      ),
+                    ),
+                    const Text("Bikes Available", style: TextStyle(color: AppColors.gray, fontSize: 11)),
                   ],
                 ),
                 const Spacer(),
-                const Text("Station Info", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(color: AppColors.lightGray, borderRadius: BorderRadius.circular(20)),
+                  child: const Text("Available", style: TextStyle(color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold)),
+                )
               ],
             ),
           ),
+          const SizedBox(height: 16),
           
-          const SizedBox(height: 20),
-          
-          // Button to Member 3's Detail Screen
+          // Green Action Button
           ElevatedButton(
             onPressed: () {
-              Navigator.pop(context); // Close dialog
-              Navigator.pushNamed(
-                context, 
-                '/station-details', 
-                arguments: station, // Passing the whole Station object
-              );
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/station-details', arguments: station);
             },
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.near_me_outlined),
-                SizedBox(width: 10),
-                Text("View All Bikes"),
+                const Icon(Icons.near_me_outlined, size: 18),
+                const SizedBox(width: 8),
+                Text("View All Bikes", style: AppTextStyles.emphasizedBody.copyWith(color: Colors.white)),
               ],
             ),
           ),

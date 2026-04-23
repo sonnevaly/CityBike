@@ -10,10 +10,11 @@ class StationMarker {
   }) {
     return Marker(
       markerId: MarkerId(station.id),
-      // MATCHED: Used Member 3's variable names
-      position: LatLng(station.latitude, station.longitude), 
+      // MUST use .latitude and .longitude to match your model
+      position: LatLng(station.latitude, station.longitude),
       onTap: () => onTap(station, context),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      infoWindow: InfoWindow(title: station.name),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:citybike/data/repositories/station/station_repository.dart';
 import 'package:citybike/model/station/station.dart';
 import 'package:citybike/ui/utils/async_value.dart';
@@ -8,8 +9,14 @@ class MapViewModel extends ChangeNotifier {
   final StationRepository repository;
   AsyncValue<List<Station>> stationValue = AsyncValue.loading();
 
+  GoogleMapController? _mapController;
+
   MapViewModel({required this.repository}) {
     getStations();
+  }
+
+  void onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
   }
 
   Future<void> getStations() async {
@@ -24,6 +31,17 @@ class MapViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void zoomToAllStations() {
+    if (_mapController == null || stationValue.state != AsyncValueState.success)
+      return;
+
+    _mapController!.animateCamera(
+      CameraUpdate.newCameraPosition(
+        const CameraPosition(target: LatLng(11.5900, 104.9123), zoom: 12.5),
+      ),
+    );
+  }
+
   void onMarkerTapped(Station station, BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -31,5 +49,11 @@ class MapViewModel extends ChangeNotifier {
       isScrollControlled: true,
       builder: (context) => StationDialog(station: station),
     );
+  }
+
+  @override
+  void dispose() {
+    _mapController?.dispose();
+    super.dispose();
   }
 }
