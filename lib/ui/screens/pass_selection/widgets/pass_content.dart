@@ -19,7 +19,6 @@ class PassContent extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          // ── Pass List ──────────────────────────────────
           Expanded(
             child: switch (vm.passPlans.state) {
               AsyncValueState.loading => const Center(
@@ -31,15 +30,12 @@ class PassContent extends StatelessWidget {
                 ),
               AsyncValueState.success => ListView(
                   children: [
-                    // Active pass banner
                     if (vm.passState.isPassActive) ...[
                       ActivePassBanner(passState: vm.passState),
                       const SizedBox(height: 12),
                       const WarningBanner(),
                       const SizedBox(height: 16),
                     ],
-
-                    // Pass cards
                     ...vm.passPlans.data!.map((plan) => PassCard(
                           pass: plan,
                           isSelected: vm.selectedPlan == plan,
@@ -49,10 +45,7 @@ class PassContent extends StatelessWidget {
                 ),
             },
           ),
-
           const SizedBox(height: 12),
-
-          // ── Bottom Buttons ─────────────────────────────
           PassBottomButtons(
             vm: vm,
             onActivate: () => _onActivate(context, vm),

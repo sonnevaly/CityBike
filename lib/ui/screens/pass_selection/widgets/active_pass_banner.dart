@@ -1,3 +1,4 @@
+import 'package:citybike/model/pass/pass.dart';
 import 'package:citybike/ui/states/pass_state.dart';
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,34 @@ import 'package:flutter/material.dart';
 class ActivePassBanner extends StatelessWidget {
   final PassState passState;
   const ActivePassBanner({super.key, required this.passState});
+
+  // Calculate total days for pass type
+  int get _totalDays {
+    switch (passState.activePass?.type) {
+      case PassType.day:
+        return 1;
+      case PassType.monthly:
+        return 30;
+      case PassType.annual:
+        return 365;
+      default:
+        return 30;
+    }
+  }
+
+  // ✅ Calculate remaining days from expiryDate
+  int get _remainingDays {
+    final expiry = passState.activePass?.expiryDate;
+    if (expiry == null) return 0;
+    final remaining = expiry.difference(DateTime.now()).inDays;
+    return remaining < 0 ? 0 : remaining;
+  }
+
+  // ✅ Progress ratio
+  double get _progress {
+    if (_totalDays == 0) return 0;
+    return _remainingDays / _totalDays;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,20 +90,24 @@ class ActivePassBanner extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+
+          // ✅ Real progress bar
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: const LinearProgressIndicator(
-              value: 0.65,
+            child: LinearProgressIndicator(
+              value: _progress,
               minHeight: 8,
               backgroundColor: AppColors.lightGray,
               valueColor:
-                  AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  const AlwaysStoppedAnimation<Color>(AppColors.primary),
             ),
           ),
           const SizedBox(height: 6),
-          const Text(
-            '19 days remaining',
-            style: TextStyle(
+
+          // ✅ Real remaining days
+          Text(
+            '$_remainingDays days remaining',
+            style: const TextStyle(
               fontSize: 12,
               color: AppColors.gray,
               fontFamily: 'Work Sans',
