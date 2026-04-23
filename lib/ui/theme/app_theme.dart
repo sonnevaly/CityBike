@@ -47,13 +47,32 @@ ThemeData appTheme = ThemeData(
   primaryColor: AppColors.primary,
   scaffoldBackgroundColor: AppColors.surface,
   fontFamily: 'Work Sans',
-  
+
   // Customizing the Typography Scale
   textTheme: const TextTheme(
-    displayLarge: TextStyle(fontFamily: 'Outfit', fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.dark),
-    titleLarge: TextStyle(fontFamily: 'Outfit', fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.dark),
-    bodyMedium: TextStyle(fontFamily: 'Work Sans', fontSize: 14, color: AppColors.gray),
-    labelLarge: TextStyle(fontFamily: 'Work Sans', fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.dark),
+    displayLarge: TextStyle(
+      fontFamily: 'Outfit',
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: AppColors.dark,
+    ),
+    titleLarge: TextStyle(
+      fontFamily: 'Outfit',
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      color: AppColors.dark,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 14,
+      color: AppColors.gray,
+    ),
+    labelLarge: TextStyle(
+      fontFamily: 'Work Sans',
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+      color: AppColors.dark,
+    ),
   ),
 
   // Global Button Style
@@ -63,7 +82,11 @@ ThemeData appTheme = ThemeData(
       foregroundColor: Colors.white,
       minimumSize: const Size(double.infinity, 54),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      textStyle: const TextStyle(fontFamily: 'Work Sans', fontWeight: FontWeight.bold, fontSize: 16),
+      textStyle: const TextStyle(
+        fontFamily: 'Work Sans',
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
     ),
   ),
 
@@ -72,7 +95,12 @@ ThemeData appTheme = ThemeData(
     backgroundColor: Colors.transparent,
     elevation: 0,
     centerTitle: false,
-    titleTextStyle: TextStyle(fontFamily: 'Outfit', fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.dark),
+    titleTextStyle: TextStyle(
+      fontFamily: 'Outfit',
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: AppColors.dark,
+    ),
     iconTheme: IconThemeData(color: AppColors.dark),
   ),
 );

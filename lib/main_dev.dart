@@ -1,26 +1,26 @@
+import 'package:citybike/data/repositories/pass/pass_repository.dart';
+import 'package:citybike/data/repositories/pass/pass_repository_mock.dart';
+import 'package:citybike/data/repositories/station/station_repository.dart';
+import 'package:citybike/data/repositories/station/station_repository_mock.dart';
+import 'package:citybike/main_common.dart';
+import 'package:citybike/ui/states/pass_state.dart';
+import 'package:citybike/ui/states/station_state.dart';
+import 'package:citybike/ui/states/user_state.dart';
 import 'package:provider/provider.dart';
-import 'main_common.dart';
-
-// Repositories
-import 'data/repositories/station/station_repository_mock.dart';
-import 'data/repositories/pass/pass_repository_mock.dart';
-
-// States (The separate Global States that keep the app clean)
-import 'ui/states/user_state.dart';
-import 'ui/states/pass_state.dart';
-import 'ui/states/station_state.dart';
 
 List<InheritedProvider> get devProviders {
   return [
     // Repositories
-    Provider(create: (_) => StationRepositoryMock()),
-    Provider(create: (_) => PassRepositoryMock()),
+    Provider<StationRepository>(create: (_) => StationRepositoryMock()),
+    Provider<PassRepository>(create: (_) => PassRepositoryMock()),
 
-    // Global States (Modular = Clean)
-    ChangeNotifierProvider(create: (_) => UserState()),    // Lead handles this
-    ChangeNotifierProvider(create: (_) => PassState()),    // Member 1 handles this
-    ChangeNotifierProvider(create: (_) => StationState()), // Member 2/3 handles this
+    // Global States - Explicitly typed
+    ChangeNotifierProvider<UserState>(create: (_) => UserState()),
+    ChangeNotifierProvider<PassState>(create: (_) => PassState()),
+    ChangeNotifierProvider<StationState>(create: (_) => StationState()),
   ];
 }
 
-void main() => mainCommon(devProviders);
+void main() {
+  mainCommon(devProviders);
+}
