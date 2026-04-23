@@ -1,4 +1,5 @@
 import 'package:citybike/ui/screens/bike_map/map_screen.dart';
+import 'package:citybike/ui/screens/pass_selection/pass_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class CityBikeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MapScreen(),
+      home: const PassScreen(),
       routes: {
         '/map': (context) => const MapScreen(), // Ensure MapScreen class exists
       },
