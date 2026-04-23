@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../model/bike/bike.dart';
 import '../../../../model/enums.dart';
@@ -24,12 +25,12 @@ class BikeSlotTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: isAvailable
-            ? const Color(0xFF2ECC71).withOpacity(0.06)
+            ? AppColors.primary.withOpacity(0.06)
             : Colors.grey.shade50,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isAvailable
-              ? const Color(0xFF2ECC71).withOpacity(0.3)
+              ? AppColors.primary.withOpacity(0.3)
               : Colors.grey.shade200,
           width: 1.2,
         ),
@@ -42,7 +43,7 @@ class BikeSlotTile extends StatelessWidget {
             height: 44,
             decoration: BoxDecoration(
               color: isAvailable
-                  ? const Color(0xFF2ECC71).withOpacity(0.15)
+                  ? AppColors.primary.withOpacity(0.15)
                   : Colors.grey.shade200,
               borderRadius: BorderRadius.circular(12),
             ),
@@ -51,7 +52,7 @@ class BikeSlotTile extends StatelessWidget {
               child: SvgPicture.asset(
                 'assets/icons/bicycle.svg',
                 colorFilter: ColorFilter.mode(
-                  isAvailable ? const Color(0xFF2ECC71) : Colors.grey,
+                  isAvailable ? AppColors.primary : Colors.grey,
                   BlendMode.srcIn,
                 ),
               ),
@@ -84,7 +85,7 @@ class BikeSlotTile extends StatelessWidget {
                       height: 12,
                       colorFilter: ColorFilter.mode(
                         isAvailable
-                            ? const Color(0xFF2ECC71)
+                            ? AppColors.primary
                             : Colors.grey,
                         BlendMode.srcIn,
                       ),
@@ -96,7 +97,7 @@ class BikeSlotTile extends StatelessWidget {
                         fontSize: 12,
                         fontFamily: 'Outfit',
                         color: isAvailable
-                            ? const Color(0xFF2ECC71)
+                            ? AppColors.primary
                             : Colors.grey,
                       ),
                     ),
@@ -121,7 +122,7 @@ class BikeSlotTile extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2ECC71),
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Text(
@@ -141,7 +142,7 @@ class BikeSlotTile extends StatelessWidget {
               height: 32,
               decoration: BoxDecoration(
                 color: isAvailable
-                    ? const Color(0xFF2ECC71).withOpacity(0.1)
+                    ? AppColors.primary.withOpacity(0.1)
                     : Colors.grey.shade200,
                 shape: BoxShape.circle,
               ),
@@ -153,7 +154,7 @@ class BikeSlotTile extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Outfit',
                     color: isAvailable
-                        ? const Color(0xFF2ECC71)
+                        ? AppColors.primary
                         : Colors.grey,
                   ),
                 ),
