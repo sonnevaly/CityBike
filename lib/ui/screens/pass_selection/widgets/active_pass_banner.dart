@@ -7,7 +7,6 @@ class ActivePassBanner extends StatelessWidget {
   final PassState passState;
   const ActivePassBanner({super.key, required this.passState});
 
-  // Calculate total days for pass type
   int get _totalDays {
     switch (passState.activePass?.type) {
       case PassType.day:
@@ -21,7 +20,6 @@ class ActivePassBanner extends StatelessWidget {
     }
   }
 
-  // ✅ Calculate remaining days from expiryDate
   int get _remainingDays {
     final expiry = passState.activePass?.expiryDate;
     if (expiry == null) return 0;
@@ -29,7 +27,6 @@ class ActivePassBanner extends StatelessWidget {
     return remaining < 0 ? 0 : remaining;
   }
 
-  // ✅ Progress ratio
   double get _progress {
     if (_totalDays == 0) return 0;
     return _remainingDays / _totalDays;
@@ -56,8 +53,11 @@ class ActivePassBanner extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.check_circle,
-                  color: AppColors.primary, size: 18),
+              const Icon(
+                Icons.check_circle,
+                color: AppColors.primary,
+                size: 18,
+              ),
               const SizedBox(width: 8),
               const Text(
                 'Current Active Pass',
@@ -91,20 +91,19 @@ class ActivePassBanner extends StatelessWidget {
           ),
           const SizedBox(height: 10),
 
-          // ✅ Real progress bar
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: LinearProgressIndicator(
               value: _progress,
               minHeight: 8,
               backgroundColor: AppColors.lightGray,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.primary),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                AppColors.primary,
+              ),
             ),
           ),
           const SizedBox(height: 6),
 
-          // ✅ Real remaining days
           Text(
             '$_remainingDays days remaining',
             style: const TextStyle(

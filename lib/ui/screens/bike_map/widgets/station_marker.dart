@@ -10,7 +10,6 @@ class StationMarker {
   }) {
     return Marker(
       markerId: MarkerId(station.id),
-      // MUST use .latitude and .longitude to match your model
       position: LatLng(station.latitude, station.longitude),
       onTap: () => onTap(station, context),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),

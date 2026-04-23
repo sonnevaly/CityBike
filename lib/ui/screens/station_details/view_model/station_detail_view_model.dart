@@ -121,7 +121,7 @@ class StationDetailViewModel extends ChangeNotifier {
       await _stationRepository.bookBike(
         station.id,
         slot.slotNumber,
-        _userState.user!.id,
+        '1'
       );
       _hasRented = true; //Mark as rented
       await loadSlots();

@@ -35,7 +35,6 @@ class PassViewModel extends ChangeNotifier {
   bool activatePass() {
     if (selectedPlan == null) return false;
 
-    // ✅ Calculate expiry date based on pass type
     final now = DateTime.now();
     DateTime expiry;
     switch (selectedPlan!.type) {
@@ -50,7 +49,6 @@ class PassViewModel extends ChangeNotifier {
         break;
     }
 
-    // Create pass with expiry date
     final passWithExpiry = Pass(
       id: selectedPlan!.id,
       title: selectedPlan!.title,

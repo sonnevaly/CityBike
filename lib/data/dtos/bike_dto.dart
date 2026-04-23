@@ -4,7 +4,7 @@ import "../../model/enums.dart";
 class BikeSlotDto {
   final String id;
   final int slotNumber;
-  final String status;   
+  final String status;
   final String? bikeType;
 
   BikeSlotDto({
@@ -24,14 +24,9 @@ class BikeSlotDto {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'slotNumber': slotNumber,
-      'status': status,
-      'bikeType': bikeType,
-    };
+    return {'slotNumber': slotNumber, 'status': status, 'bikeType': bikeType};
   }
 
- 
   BikeSlot toDomain() {
     return BikeSlot(
       slotNumber: slotNumber,
@@ -45,7 +40,6 @@ class BikeSlotDto {
     if (type == 'electric') return BikeType.electric;
     return null;
   }
-
 
   SlotStatus _parseStatus(String statusStr) {
     switch (statusStr) {

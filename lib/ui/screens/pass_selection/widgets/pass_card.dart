@@ -92,7 +92,6 @@ class PassCard extends StatelessWidget {
               ),
             ),
 
-            // Right — Active badge or checkmark
             if (isSelected)
               Column(
                 children: [

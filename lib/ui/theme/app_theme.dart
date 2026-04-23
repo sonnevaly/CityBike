@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// lib/ui/theme/theme.dart
 class AppColors {
   static const Color primary = Color(0xFF10B981);
   static const Color alertBlue = Color(0xFFD1E9FF);
@@ -12,7 +11,6 @@ class AppColors {
   static const Color lightGray = Color(0xFFE5E7EB);
 }
 
-// Global Text Styles for easy use
 class AppTextStyles {
   static const TextStyle heading = TextStyle(
     fontFamily: 'Outfit',
@@ -48,7 +46,6 @@ ThemeData appTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.surface,
   fontFamily: 'Work Sans',
 
-  // Customizing the Typography Scale
   textTheme: const TextTheme(
     displayLarge: TextStyle(
       fontFamily: 'Outfit',
@@ -75,7 +72,6 @@ ThemeData appTheme = ThemeData(
     ),
   ),
 
-  // Global Button Style
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primary,
@@ -90,7 +86,6 @@ ThemeData appTheme = ThemeData(
     ),
   ),
 
-  // AppBar Style
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
     elevation: 0,

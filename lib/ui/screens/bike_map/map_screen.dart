@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-// FIX 1: MUST use package imports for the Repository and ViewModel
 import 'package:citybike/data/repositories/station/station_repository.dart';
 import 'package:citybike/ui/screens/bike_map/view_model/map_view_model.dart';
 import 'package:citybike/ui/screens/bike_map/widgets/map_content.dart';
@@ -13,7 +11,6 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => MapViewModel(
-        // FIX 2: Use Provider.of with explicit type <StationRepository>
         repository: Provider.of<StationRepository>(context, listen: false),
       ),
       child: const Scaffold(

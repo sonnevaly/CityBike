@@ -10,11 +10,11 @@ import 'package:provider/provider.dart';
 
 List<InheritedProvider> get devProviders {
   return [
-    // Repositories
+
     Provider<StationRepository>(create: (_) => StationRepositoryMock()),
     Provider<PassRepository>(create: (_) => PassRepositoryMock()),
 
-    // Global States - Explicitly typed
+   
     ChangeNotifierProvider<UserState>(create: (_) => UserState()),
     ChangeNotifierProvider<PassState>(create: (_) => PassState()),
     ChangeNotifierProvider<StationState>(create: (_) => StationState()),

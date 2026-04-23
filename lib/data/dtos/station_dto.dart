@@ -8,8 +8,14 @@ class StationDto {
   final double longitude;
   final int totalSlots;
 
-  StationDto({required this.id, required this.name, required this.address, 
-              required this.latitude, required this.longitude, required this.totalSlots});
+  StationDto({
+    required this.id,
+    required this.name,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
+    required this.totalSlots,
+  });
 
   factory StationDto.fromJson(String id, Map<String, dynamic> json) {
     return StationDto(
@@ -22,7 +28,6 @@ class StationDto {
     );
   }
 
-  // Convert DTO to the clean Station model
   Station toDomain() {
     return Station(
       id: id,

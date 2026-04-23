@@ -6,7 +6,7 @@ class Pass {
   final double price;
   final String duration;
   final PassType type;
-  final DateTime? expiryDate; // Added for Acceptance Point: "Each pass has an expiration date"
+  final DateTime? expiryDate; 
 
   Pass({
     required this.id,
@@ -17,6 +17,5 @@ class Pass {
     this.expiryDate,
   });
 
-  // Helper to check if pass is still valid
   bool get isValid => expiryDate == null || expiryDate!.isAfter(DateTime.now());
 }
