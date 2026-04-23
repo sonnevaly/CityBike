@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 
 class PassViewModel extends ChangeNotifier {
   final PassRepository repository;
+  final PassState passState;
 
   AsyncValue<List<Pass>> passPlans = AsyncValue.loading();
   Pass? selectedPlan;
 
-  PassViewModel({required this.repository, required PassState passState}) {
+  PassViewModel({required this.repository, required this.passState}) {
     _fetch();
   }
 
@@ -29,5 +30,11 @@ class PassViewModel extends ChangeNotifier {
   void selectPlan(Pass plan) {
     selectedPlan = plan;
     notifyListeners();
+  }
+
+  bool activatePass() {
+    if (selectedPlan == null) return false;
+    passState.activatePass(selectedPlan!);
+    return true;
   }
 }
