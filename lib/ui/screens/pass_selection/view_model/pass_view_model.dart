@@ -1,5 +1,6 @@
 import 'package:citybike/data/repositories/pass/pass_repository.dart';
 import 'package:citybike/model/pass/pass.dart';
+import 'package:citybike/ui/states/pass_state.dart';
 import 'package:citybike/ui/utils/async_value.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class PassViewModel extends ChangeNotifier {
   AsyncValue<List<Pass>> passPlans = AsyncValue.loading();
   Pass? selectedPlan;
 
-  PassViewModel({required this.repository}) {
+  PassViewModel({required this.repository, required PassState passState}) {
     _fetch();
   }
 
