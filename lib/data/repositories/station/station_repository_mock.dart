@@ -28,27 +28,27 @@ class StationRepositoryMock implements StationRepository {
     return [
       Station(
         id: 'station_1',
-        name: 'Central Park Station',
-        address: '123 Central Ave',
-        latitude: 48.8566,
-        longitude: 2.3522,
-        totalSlots: 5,
+        name: 'CADT Innovation Center',
+        address: 'Bridge 2, Prek Leap',
+        latitude: 11.6261, // Phnom Penh
+        longitude: 104.9123, // Phnom Penh
+        totalSlots: 14,
       ),
       Station(
         id: 'station_2',
-        name: 'Riverside Station',
-        address: '45 River Rd',
-        latitude: 48.860,
-        longitude: 2.358,
-        totalSlots: 5,
+        name: 'Vattanac Capital',
+        address: 'Monivong Blvd',
+        latitude: 11.5712, // Phnom Penh
+        longitude: 104.9215, // Phnom Penh
+        totalSlots: 20,
       ),
       Station(
         id: 'station_3',
-        name: 'Old Town Station',
-        address: '7 Heritage St',
-        latitude: 48.855,
-        longitude: 2.349,
-        totalSlots: 5,
+        name: 'Exchange Square',
+        address: 'Street 106',
+        latitude: 11.5745, // Phnom Penh
+        longitude: 104.9230, // Phnom Penh
+        totalSlots: 15,
       ),
     ];
   }
