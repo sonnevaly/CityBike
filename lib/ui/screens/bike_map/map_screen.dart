@@ -9,10 +9,14 @@ class MapScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MapViewModel(
-        repository: Provider.of<StationRepository>(context, listen: false),
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MapViewModel(
+            repository: Provider.of<StationRepository>(context, listen: false),
+          ),
+        ),
+      ],
       child: const Scaffold(body: MapContent()),
     );
   }

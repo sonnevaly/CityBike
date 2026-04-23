@@ -84,7 +84,7 @@ class _StationDetailBody extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          success ? '🚲 Bike rented successfully!' : 'Rental failed.',
+          success ? 'Bike rented successfully!' : 'Rental failed.',
           style: const TextStyle(fontFamily: 'Outfit'),
         ),
         backgroundColor: success ? AppColors.primary : Colors.red,
