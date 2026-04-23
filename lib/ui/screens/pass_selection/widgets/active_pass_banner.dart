@@ -1,0 +1,87 @@
+import 'package:citybike/ui/states/pass_state.dart';
+import 'package:citybike/ui/theme/app_theme.dart';
+import 'package:flutter/material.dart';
+
+class ActivePassBanner extends StatelessWidget {
+  final PassState passState;
+  const ActivePassBanner({super.key, required this.passState});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.lightGray),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.check_circle,
+                  color: AppColors.primary, size: 18),
+              const SizedBox(width: 8),
+              const Text(
+                'Current Active Pass',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Outfit',
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          RichText(
+            text: TextSpan(
+              style: const TextStyle(
+                fontFamily: 'Work Sans',
+                fontSize: 13,
+                color: AppColors.gray,
+              ),
+              children: [
+                const TextSpan(text: 'You have an active '),
+                TextSpan(
+                  text: passState.activePass?.title ?? '',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.dark,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: const LinearProgressIndicator(
+              value: 0.65,
+              minHeight: 8,
+              backgroundColor: AppColors.lightGray,
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(AppColors.primary),
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            '19 days remaining',
+            style: TextStyle(
+              fontSize: 12,
+              color: AppColors.gray,
+              fontFamily: 'Work Sans',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
