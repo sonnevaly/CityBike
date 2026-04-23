@@ -34,7 +34,33 @@ class PassViewModel extends ChangeNotifier {
 
   bool activatePass() {
     if (selectedPlan == null) return false;
-    passState.activatePass(selectedPlan!);
+
+    // ✅ Calculate expiry date based on pass type
+    final now = DateTime.now();
+    DateTime expiry;
+    switch (selectedPlan!.type) {
+      case PassType.day:
+        expiry = now.add(const Duration(days: 1));
+        break;
+      case PassType.monthly:
+        expiry = now.add(const Duration(days: 30));
+        break;
+      case PassType.annual:
+        expiry = now.add(const Duration(days: 365));
+        break;
+    }
+
+    // Create pass with expiry date
+    final passWithExpiry = Pass(
+      id: selectedPlan!.id,
+      title: selectedPlan!.title,
+      price: selectedPlan!.price,
+      duration: selectedPlan!.duration,
+      type: selectedPlan!.type,
+      expiryDate: expiry,
+    );
+
+    passState.activatePass(passWithExpiry);
     return true;
   }
 }
