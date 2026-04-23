@@ -37,11 +37,66 @@ class PassContent extends StatelessWidget {
               ),
             },
           ),
+
           ElevatedButton(
+            onPressed: vm.selectedPlan == null
+                ? null
+                : () => _onActivate(context, vm),
+            child: const Text("Continue"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _onActivate(BuildContext context, PassViewModel vm) async {
+    final success = vm.activatePass();
+
+    if (!success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select a pass first!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    await showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.check_circle, color: Color(0xFF2ECC71), size: 60),
+            const SizedBox(height: 12),
+            const Text(
+              'Pass Activated!',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Outfit',
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '${vm.selectedPlan!.title} is now active.',
+              style: const TextStyle(color: Colors.grey, fontFamily: 'Outfit'),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
             onPressed: () {
+              Navigator.of(context).pop();
               Navigator.pushReplacementNamed(context, '/map');
             },
-            child: const Text("Activate Pass"),
+            child: const Text(
+              'Go to Map',
+              style: TextStyle(color: Color(0xFF2ECC71), fontFamily: 'Outfit'),
+            ),
           ),
         ],
       ),
