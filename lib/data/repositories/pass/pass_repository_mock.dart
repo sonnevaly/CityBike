@@ -5,7 +5,6 @@ import 'pass_repository.dart';
 class PassRepositoryMock implements PassRepository {
   @override
   Future<List<Pass>> getPasses() async {
-    // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
     return [
       Pass(

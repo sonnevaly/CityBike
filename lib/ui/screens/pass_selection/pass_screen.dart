@@ -15,18 +15,14 @@ class PassScreen extends StatelessWidget {
     final passState = context.read<PassState>();
 
     return ChangeNotifierProvider(
-      create: (_) => PassViewModel(
-        repository: repository,
-        passState: passState,
-      ),
+      create: (_) =>
+          PassViewModel(repository: repository, passState: passState),
       child: Scaffold(
         backgroundColor: const Color(0xFFF9FAFB),
         body: const Column(
           children: [
-            PassHeader(),        // green header
-            Expanded(
-              child: PassContent(), // pass list + buttons
-            ),
+            PassHeader(),
+            Expanded(child: PassContent()),
           ],
         ),
       ),

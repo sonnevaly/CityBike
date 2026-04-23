@@ -16,7 +16,7 @@ class Bike {
 
 class BikeSlot {
   final int slotNumber;
-  final BikeType? bikeType; // null if slot is empty/maintenance
+  final BikeType? bikeType; 
   final SlotStatus status;
 
   BikeSlot({

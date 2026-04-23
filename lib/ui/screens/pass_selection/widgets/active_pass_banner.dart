@@ -56,8 +56,11 @@ class ActivePassBanner extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.check_circle,
-                  color: AppColors.primary, size: 18),
+              const Icon(
+                Icons.check_circle,
+                color: AppColors.primary,
+                size: 18,
+              ),
               const SizedBox(width: 8),
               const Text(
                 'Current Active Pass',
@@ -98,8 +101,9 @@ class ActivePassBanner extends StatelessWidget {
               value: _progress,
               minHeight: 8,
               backgroundColor: AppColors.lightGray,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.primary),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                AppColors.primary,
+              ),
             ),
           ),
           const SizedBox(height: 6),

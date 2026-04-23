@@ -20,7 +20,9 @@ class WarningBanner extends StatelessWidget {
             'assets/icons/warning.svg',
             width: 16,
             colorFilter: const ColorFilter.mode(
-                AppColors.alertText, BlendMode.srcIn),
+              AppColors.alertText,
+              BlendMode.srcIn,
+            ),
           ),
           const SizedBox(width: 8),
           const Expanded(

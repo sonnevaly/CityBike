@@ -12,7 +12,6 @@ class MapContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Listen to the Map ViewModel
     final vm = context.watch<MapViewModel>();
     final asyncValue = vm.stationValue;
 
@@ -53,10 +52,9 @@ class MapContent extends StatelessWidget {
         return Stack(
           children: [
             GoogleMap(
-              onMapCreated:
-                  vm.onMapCreated, // Connects the controller for zooming
+              onMapCreated: vm.onMapCreated,
               initialCameraPosition: const CameraPosition(
-                target: LatLng(11.6261, 104.9123), // CADT Phnom Penh
+                target: LatLng(11.6261, 104.9123),
                 zoom: 14,
               ),
               markers: markers,
@@ -105,8 +103,6 @@ class MapContent extends StatelessWidget {
         );
     }
   }
-
-  // --- UI HELPER METHODS ---
 
   Widget _buildSearchBar() {
     return Container(
@@ -178,7 +174,6 @@ class MapContent extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // MAP ITEM (Active)
           _navItem(
             Icons.directions_bike,
             "Map",
@@ -186,7 +181,7 @@ class MapContent extends StatelessWidget {
             true,
             onTap: () => vm.getStations(),
           ),
-          // PASSES ITEM (Navigates Back)
+
           _navItem(
             Icons.near_me_outlined,
             "Passes",

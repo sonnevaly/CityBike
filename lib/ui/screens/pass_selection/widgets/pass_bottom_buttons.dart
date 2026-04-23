@@ -14,11 +14,9 @@ class PassBottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Has active pass → show Current Pass + Continue to Map
     if (vm.passState.isPassActive) {
       return Column(
         children: [
-          // Disabled "Current Pass" button
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -28,25 +26,27 @@ class PassBottomButtons extends StatelessWidget {
                 disabledForegroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 54),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              child: const Text('Current Pass',
-                  style: TextStyle(fontFamily: 'Outfit')),
+              child: const Text(
+                'Current Pass',
+                style: TextStyle(fontFamily: 'Outfit'),
+              ),
             ),
           ),
           const SizedBox(height: 10),
 
-          // "Continue to Map" button
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, '/map'),
+              onPressed: () => Navigator.pushReplacementNamed(context, '/map'),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 54),
                 side: const BorderSide(color: AppColors.primary),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               child: const Text(
                 'Continue to Map',
@@ -62,14 +62,41 @@ class PassBottomButtons extends StatelessWidget {
       );
     }
 
-    // No active pass → show "Activate Pass" button
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: vm.selectedPlan == null ? null : onActivate,
-        child: const Text('Activate Pass',
-            style: TextStyle(fontFamily: 'Outfit')),
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: vm.selectedPlan == null ? null : onActivate,
+            child: const Text(
+              'Activate Pass',
+              style: TextStyle(fontFamily: 'Outfit'),
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          child: OutlinedButton(
+            onPressed: () => Navigator.pushReplacementNamed(context, '/map'),
+            style: OutlinedButton.styleFrom(
+              minimumSize: const Size(double.infinity, 54),
+              side: const BorderSide(color: AppColors.primary),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: const Text(
+              'Continue to Map',
+              style: TextStyle(
+                color: AppColors.primary,
+                fontFamily: 'Outfit',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

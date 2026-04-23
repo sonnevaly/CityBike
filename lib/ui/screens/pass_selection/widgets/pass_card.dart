@@ -92,13 +92,14 @@ class PassCard extends StatelessWidget {
               ),
             ),
 
-            // Right — Active badge or checkmark
             if (isSelected)
               Column(
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(20),
@@ -126,7 +127,9 @@ class PassCard extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/icons/mdi_tick.svg',
                         colorFilter: const ColorFilter.mode(
-                            Colors.white, BlendMode.srcIn),
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ),
