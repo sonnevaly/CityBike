@@ -67,7 +67,7 @@ class StationDialog extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "10",
+                            text: "2",
                             style: TextStyle(
                               color: AppColors.dark,
                               fontWeight: FontWeight.bold,
