@@ -1,3 +1,6 @@
+import "../../model/bike/bike.dart";
+import "../../model/enums.dart";
+
 class BikeSlotDto {
   final String id;
   final int slotNumber;
@@ -26,5 +29,32 @@ class BikeSlotDto {
       'status': status,
       'bikeType': bikeType,
     };
+  }
+
+ 
+  BikeSlot toDomain() {
+    return BikeSlot(
+      slotNumber: slotNumber,
+      bikeType: _parseBikeType(bikeType),
+      status: _parseStatus(status),
+    );
+  }
+
+  BikeType? _parseBikeType(String? type) {
+    if (type == 'standard') return BikeType.standard;
+    if (type == 'electric') return BikeType.electric;
+    return null;
+  }
+
+
+  SlotStatus _parseStatus(String statusStr) {
+    switch (statusStr) {
+      case 'available':
+        return SlotStatus.available;
+      case 'maintenance':
+        return SlotStatus.maintenance;
+      default:
+        return SlotStatus.empty;
+    }
   }
 }

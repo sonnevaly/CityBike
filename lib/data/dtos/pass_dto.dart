@@ -1,34 +1,28 @@
-class PassDto {
-  final String id;
-  final String title;
-  final double price;
-  final String duration;
-  final String type; 
+import "../../model/pass/pass.dart";
 
-  PassDto({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.duration,
-    required this.type,
-  });
+class PassDto {
+  final String id, title, duration, type;
+  final double price;
+
+  PassDto({required this.id, required this.title, required this.duration, required this.type, required this.price});
 
   factory PassDto.fromJson(String id, Map<String, dynamic> json) {
     return PassDto(
       id: id,
       title: json['title'] ?? '',
-      price: (json['price'] as num).toDouble(),
       duration: json['duration'] ?? '',
       type: json['type'] ?? 'day',
+      price: (json['price'] as num).toDouble(),
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'price': price,
-      'duration': duration,
-      'type': type,
-    };
+  Pass toDomain() {
+    return Pass(
+      id: id,
+      title: title,
+      price: price,
+      duration: duration,
+      type: type == 'monthly' ? PassType.monthly : (type == 'annual' ? PassType.annual : PassType.day),
+    );
   }
 }

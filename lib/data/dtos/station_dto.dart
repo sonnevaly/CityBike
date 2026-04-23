@@ -1,3 +1,5 @@
+import 'package:citybike/model/station/station.dart';
+
 class StationDto {
   final String id;
   final String name;
@@ -6,14 +8,8 @@ class StationDto {
   final double longitude;
   final int totalSlots;
 
-  StationDto({
-    required this.id,
-    required this.name,
-    required this.address,
-    required this.latitude,
-    required this.longitude,
-    required this.totalSlots,
-  });
+  StationDto({required this.id, required this.name, required this.address, 
+              required this.latitude, required this.longitude, required this.totalSlots});
 
   factory StationDto.fromJson(String id, Map<String, dynamic> json) {
     return StationDto(
@@ -26,13 +22,15 @@ class StationDto {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'address': address,
-      'latitude': latitude,
-      'longitude': longitude,
-      'totalSlots': totalSlots,
-    };
+  // Convert DTO to the clean Station model
+  Station toDomain() {
+    return Station(
+      id: id,
+      name: name,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      totalSlots: totalSlots,
+    );
   }
 }
