@@ -52,10 +52,9 @@ class MapContent extends StatelessWidget {
         return Stack(
           children: [
             GoogleMap(
-              onMapCreated:
-                  vm.onMapCreated, 
+              onMapCreated: vm.onMapCreated,
               initialCameraPosition: const CameraPosition(
-                target: LatLng(11.6261, 104.9123), 
+                target: LatLng(11.6261, 104.9123),
                 zoom: 14,
               ),
               markers: markers,
@@ -88,7 +87,7 @@ class MapContent extends StatelessWidget {
               bottom: 110,
               right: 20,
               child: _buildCircleButton(
-                Icons.near_me_outlined,
+                Icons.my_location,
                 () => vm.zoomToAllStations(),
                 size: 56,
                 iconColor: AppColors.primary,
@@ -104,7 +103,6 @@ class MapContent extends StatelessWidget {
         );
     }
   }
-
 
   Widget _buildSearchBar() {
     return Container(
@@ -176,7 +174,6 @@ class MapContent extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-    
           _navItem(
             Icons.directions_bike,
             "Map",
