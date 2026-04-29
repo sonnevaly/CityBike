@@ -1,16 +1,19 @@
-import 'package:citybike/model/pass/pass.dart';
+import 'package:citybike/model/user_pass/user_pass.dart';
 import 'package:flutter/material.dart';
 
 class PassState extends ChangeNotifier {
-  Pass? _activePass;
-  bool _isPassActive = false;
+  UserPass? _activePass;
 
-  Pass? get activePass => _activePass;
-  bool get isPassActive => _isPassActive;
+  UserPass? get activePass => _activePass;
 
-  void activatePass(Pass plan) {
-    _activePass = plan;
-    _isPassActive = true;
+  bool get isPassActive {
+    final pass = _activePass;
+    if (pass == null) return false;
+    return pass.expiresAt.isAfter(DateTime.now());
+  }
+
+  void activatePass(UserPass pass) {
+    _activePass = pass;
     notifyListeners();
   }
 }

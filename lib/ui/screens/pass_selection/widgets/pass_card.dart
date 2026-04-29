@@ -78,7 +78,7 @@ class PassCard extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: ' /${pass.duration}',
+                          text: ' /${_durationLabel(pass.durationDays)}',
                           style: TextStyle(
                             fontSize: 13,
                             fontFamily: 'Work Sans',
@@ -97,13 +97,15 @@ class PassCard extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.primary,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
-                      'Active',
+                      'Selected',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 11,
@@ -125,7 +127,9 @@ class PassCard extends StatelessWidget {
                       child: SvgPicture.asset(
                         'assets/icons/mdi_tick.svg',
                         colorFilter: const ColorFilter.mode(
-                            Colors.white, BlendMode.srcIn),
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ),
@@ -138,13 +142,22 @@ class PassCard extends StatelessWidget {
   }
 
   String get _description {
-    switch (pass.type) {
-      case PassType.day:
+    switch (pass.durationDays) {
+      case 1:
         return 'Perfect for a quick ride around the city';
-      case PassType.monthly:
+      case 7:
+        return 'Great for a full week of city rides';
+      case 30:
         return 'Best value for commuters';
-      case PassType.annual:
-        return 'Unlimited ride all year long';
+      case 365:
+        return 'Unlimited rides all year long';
+      default:
+        return 'Bike access for ${pass.durationDays} days';
     }
+  }
+
+  String _durationLabel(int days) {
+    if (days == 1) return '24 Hours';
+    return '$days Days';
   }
 }

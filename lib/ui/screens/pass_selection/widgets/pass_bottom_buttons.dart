@@ -69,28 +69,6 @@ class PassBottomButtons extends StatelessWidget {
                 style: TextStyle(fontFamily: 'Outfit')),
           ),
         ),
-        SizedBox(height: 10,),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, '/map'),
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 54),
-              side: const BorderSide(color: AppColors.primary),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text(
-              'Continue to Map',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }

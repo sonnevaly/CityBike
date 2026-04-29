@@ -56,7 +56,7 @@ class PassContent extends StatelessWidget {
   }
 
   Future<void> _onActivate(BuildContext context, PassViewModel vm) async {
-    final success = vm.activatePass();
+    final success = await vm.activatePass();
 
     if (!success) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -47,7 +47,10 @@ class MapViewModel extends ChangeNotifier {
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (context) => StationDialog(station: station),
+      builder: (context) => StationDialog(
+        station: station,
+        onStationChanged: getStations,
+      ),
     );
   }
 

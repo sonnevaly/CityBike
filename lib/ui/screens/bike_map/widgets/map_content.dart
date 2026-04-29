@@ -5,10 +5,19 @@ import 'package:provider/provider.dart';
 import 'package:citybike/ui/utils/async_value.dart';
 import 'package:citybike/ui/screens/bike_map/view_model/map_view_model.dart';
 import 'package:citybike/ui/screens/bike_map/widgets/station_marker.dart';
+import 'package:citybike/model/enums.dart';
 import 'package:citybike/model/station/station.dart';
 
-class MapContent extends StatelessWidget {
+class MapContent extends StatefulWidget {
   const MapContent({super.key});
+
+  @override
+  State<MapContent> createState() => _MapContentState();
+}
+
+class _MapContentState extends State<MapContent> {
+  Set<Marker> _markers = {};
+  String? _markerSignature;
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +48,7 @@ class MapContent extends StatelessWidget {
 
       case AsyncValueState.success:
         final List<Station> stations = asyncValue.data!;
-        final markers = stations
-            .map(
-              (s) => StationMarker.build(
-                station: s,
-                context: context,
-                onTap: (station, ctx) => vm.onMarkerTapped(station, ctx),
-              ),
-            )
-            .toSet();
+        _updateMarkersIfNeeded(stations, vm);
 
         return Stack(
           children: [
@@ -57,7 +58,7 @@ class MapContent extends StatelessWidget {
                 target: LatLng(11.6261, 104.9123),
                 zoom: 14,
               ),
-              markers: markers,
+              markers: _markers,
               myLocationEnabled: true,
               zoomControlsEnabled: false,
               mapToolbarEnabled: false,
@@ -128,6 +129,34 @@ class MapContent extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _updateMarkersIfNeeded(List<Station> stations, MapViewModel vm) {
+    final signature = stations.map((station) {
+      final available = station.slots.where((slot) {
+        return slot.status == SlotStatus.available && slot.bikeId != null;
+      }).length;
+      return '${station.id}:$available:${station.slots.length}';
+    }).join('|');
+
+    if (_markerSignature == signature) return;
+    _markerSignature = signature;
+
+    Future.wait(
+      stations.map(
+        (station) => StationMarker.build(
+          station: station,
+          context: context,
+          onTap: (selectedStation, ctx) =>
+              vm.onMarkerTapped(selectedStation, ctx),
+        ),
+      ),
+    ).then((markers) {
+      if (!mounted) return;
+      setState(() {
+        _markers = markers.toSet();
+      });
+    });
   }
 
   Widget _buildCircleButton(
