@@ -26,10 +26,8 @@ class PassScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFF9FAFB),
         body: const Column(
           children: [
-            PassHeader(),       
-            Expanded(
-              child: PassContent(), 
-            ),
+            PassHeader(),
+            Expanded(child: PassContent()),
           ],
         ),
       ),

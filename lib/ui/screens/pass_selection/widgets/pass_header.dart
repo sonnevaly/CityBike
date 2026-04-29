@@ -29,8 +29,10 @@ class PassHeader extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               child: SvgPicture.asset(
                 'assets/icons/bicycle.svg',
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(
+                  Colors.white,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
