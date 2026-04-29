@@ -1,2 +1,9 @@
-enum PassType { day, monthly, annual }
-enum SlotStatus { available, empty, maintenance }
+enum SlotStatus {
+  available,
+  empty,
+}
+
+enum BookingStatus {
+  active,
+  completed,
+}

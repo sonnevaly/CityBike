@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../model/bike/bike.dart';
+import '../../../../model/bike_slot/bike_slot.dart';
+import '../../../../model/enums.dart';
 import '../../../../ui/screens/station_details/view_model/station_detail_view_model.dart';
 import '../../../../ui/utils/async_value.dart';
 import 'bike_slot_tile.dart';
@@ -9,7 +10,8 @@ import 'section_header.dart';
 
 class SlotList extends StatelessWidget {
   final StationDetailViewModel vm;
-  final Future<void> Function(BuildContext, StationDetailViewModel, BikeSlot) onRent;
+  final Future<void> Function(BuildContext, StationDetailViewModel, BikeSlot)
+      onRent;
 
   const SlotList({
     super.key,
@@ -53,9 +55,10 @@ class SlotList extends StatelessWidget {
 
       case AsyncValueState.success:
         final data = vm.slots.data!;
-        final available = data.where((s) => s.isAvailable).toList();
-        final inUse = data.where((s) => !s.isAvailable && !s.isEmpty).toList();
-        final empty = data.where((s) => s.isEmpty).toList();
+        final available = data
+            .where((s) => s.status == SlotStatus.available && s.bikeId != null)
+            .toList();
+        final empty = data.where((s) => s.status == SlotStatus.empty).toList();
 
         return ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -89,21 +92,6 @@ class SlotList extends StatelessWidget {
                     slot: slot,
                     isBooking: vm.isBooking,
                     onRent: () => onRent(context, vm, slot),
-                  )),
-              const SizedBox(height: 16),
-            ],
-
-            if (inUse.isNotEmpty) ...[
-              SectionHeader(
-                title: 'Currently In Use',
-                count: '${inUse.length} Bikes',
-                countColor: Colors.grey,
-              ),
-              const SizedBox(height: 8),
-              ...inUse.map((slot) => BikeSlotTile(
-                    slot: slot,
-                    isBooking: false,
-                    onRent: null,
                   )),
               const SizedBox(height: 16),
             ],

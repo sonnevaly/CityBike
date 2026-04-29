@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:provider/provider.dart';
+import '../../../data/repositories/booking/booking_repository.dart';
 import '../../../model/station/station.dart';
-import '../../../model/bike/bike.dart';
+import '../../../model/bike_slot/bike_slot.dart';
 import '../../../data/repositories/station/station_repository.dart';
 import '../../../ui/states/user_state.dart';
 import '../../../ui/states/pass_state.dart';
@@ -20,12 +21,14 @@ class StationDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final repo = context.read<StationRepository>();
+    final bookingRepository = context.read<BookingRepository>();
     final userState = context.read<UserState>();
     final passState = context.read<PassState>();
 
     return ChangeNotifierProvider(
       create: (_) => StationDetailViewModel(
         stationRepository: repo,
+        bookingRepository: bookingRepository,
         userState: userState,
         passState: passState,
         station: station,
@@ -84,7 +87,7 @@ class _StationDetailBody extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          success ? '🚲 Bike rented successfully!' : 'Rental failed.',
+          success ? 'Bike rented successfully!' : 'Rental failed.',
           style: const TextStyle(fontFamily: 'Outfit'),
         ),
         backgroundColor: success ? AppColors.primary : Colors.red,
