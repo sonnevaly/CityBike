@@ -37,10 +37,5 @@ class PassDto {
       price: price,
       durationDays: durationDays,
     );
-    return {'title': title, 'price': price, 'durationDays': durationDays};
-  }
-
-  Pass toDomain() {
-    return Pass(id: id, title: title, price: price, durationDays: durationDays);
   }
 }
