@@ -26,10 +26,13 @@ class PassBottomButtons extends StatelessWidget {
                 disabledForegroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 54),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-              child: const Text('Current Pass',
-                  style: TextStyle(fontFamily: 'Outfit')),
+              child: const Text(
+                'Current Pass',
+                style: TextStyle(fontFamily: 'Outfit'),
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -37,13 +40,13 @@ class PassBottomButtons extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, '/map'),
+              onPressed: () => Navigator.pushReplacementNamed(context, '/map'),
               style: OutlinedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 54),
                 side: const BorderSide(color: AppColors.primary),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               child: const Text(
                 'Continue to Map',
@@ -65,29 +68,9 @@ class PassBottomButtons extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: vm.selectedPlan == null ? null : onActivate,
-            child: const Text('Activate Pass',
-                style: TextStyle(fontFamily: 'Outfit')),
-          ),
-        ),
-        SizedBox(height: 10,),
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, '/map'),
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 54),
-              side: const BorderSide(color: AppColors.primary),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
             child: const Text(
-              'Continue to Map',
-              style: TextStyle(
-                color: AppColors.primary,
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.bold,
-              ),
+              'Activate Pass',
+              style: TextStyle(fontFamily: 'Outfit'),
             ),
           ),
         ),

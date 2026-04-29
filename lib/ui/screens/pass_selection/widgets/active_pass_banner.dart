@@ -1,4 +1,3 @@
-import 'package:citybike/model/pass/pass.dart';
 import 'package:citybike/ui/states/pass_state.dart';
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,20 +7,11 @@ class ActivePassBanner extends StatelessWidget {
   const ActivePassBanner({super.key, required this.passState});
 
   int get _totalDays {
-    switch (passState.activePass?.type) {
-      case PassType.day:
-        return 1;
-      case PassType.monthly:
-        return 30;
-      case PassType.annual:
-        return 365;
-      default:
-        return 30;
-    }
+    return passState.activePass?.pass.durationDays ?? 1;
   }
 
   int get _remainingDays {
-    final expiry = passState.activePass?.expiryDate;
+    final expiry = passState.activePass?.expiresAt;
     if (expiry == null) return 0;
     final remaining = expiry.difference(DateTime.now()).inDays;
     return remaining < 0 ? 0 : remaining;
@@ -80,7 +70,7 @@ class ActivePassBanner extends StatelessWidget {
               children: [
                 const TextSpan(text: 'You have an active '),
                 TextSpan(
-                  text: passState.activePass?.title ?? '',
+                  text: passState.activePass?.pass.title ?? '',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.dark,

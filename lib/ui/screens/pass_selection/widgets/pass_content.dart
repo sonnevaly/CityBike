@@ -22,41 +22,42 @@ class PassContent extends StatelessWidget {
           Expanded(
             child: switch (vm.passPlans.state) {
               AsyncValueState.loading => const Center(
-                  child: CircularProgressIndicator(color: AppColors.primary),
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
+              ),
               AsyncValueState.error => const Center(
-                  child: Text('Error loading passes',
-                      style: TextStyle(fontFamily: 'Outfit')),
+                child: Text(
+                  'Error loading passes',
+                  style: TextStyle(fontFamily: 'Outfit'),
                 ),
+              ),
               AsyncValueState.success => ListView(
-                  children: [
-                    if (vm.passState.isPassActive) ...[
-                      ActivePassBanner(passState: vm.passState),
-                      const SizedBox(height: 12),
-                      const WarningBanner(),
-                      const SizedBox(height: 16),
-                    ],
-                    ...vm.passPlans.data!.map((plan) => PassCard(
-                          pass: plan,
-                          isSelected: vm.selectedPlan == plan,
-                          onTap: () => vm.selectPlan(plan),
-                        )),
+                children: [
+                  if (vm.passState.isPassActive) ...[
+                    ActivePassBanner(passState: vm.passState),
+                    const SizedBox(height: 12),
+                    const WarningBanner(),
+                    const SizedBox(height: 16),
                   ],
-                ),
+                  ...vm.passPlans.data!.map(
+                    (plan) => PassCard(
+                      pass: plan,
+                      isSelected: vm.selectedPlan == plan,
+                      onTap: () => vm.selectPlan(plan),
+                    ),
+                  ),
+                ],
+              ),
             },
           ),
           const SizedBox(height: 12),
-          PassBottomButtons(
-            vm: vm,
-            onActivate: () => _onActivate(context, vm),
-          ),
+          PassBottomButtons(vm: vm, onActivate: () => _onActivate(context, vm)),
         ],
       ),
     );
   }
 
   Future<void> _onActivate(BuildContext context, PassViewModel vm) async {
-    final success = vm.activatePass();
+    final success = await vm.activatePass();
 
     if (!success) {
       ScaffoldMessenger.of(context).showSnackBar(
