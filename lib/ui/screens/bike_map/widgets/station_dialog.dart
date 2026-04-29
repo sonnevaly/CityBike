@@ -1,13 +1,25 @@
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:citybike/model/enums.dart';
 import 'package:citybike/model/station/station.dart';
 
 class StationDialog extends StatelessWidget {
   final Station station;
-  const StationDialog({super.key, required this.station});
+  final Future<void> Function()? onStationChanged;
+
+  const StationDialog({
+    super.key,
+    required this.station,
+    this.onStationChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final totalSlots = station.slots.length;
+    final availableBikes = station.slots.where((slot) {
+      return slot.status == SlotStatus.available && slot.bikeId != null;
+    }).length;
+
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
@@ -67,7 +79,7 @@ class StationDialog extends StatelessWidget {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "2",
+                            text: "$availableBikes",
                             style: TextStyle(
                               color: AppColors.dark,
                               fontWeight: FontWeight.bold,
@@ -75,7 +87,7 @@ class StationDialog extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: "/${station.totalSlots}",
+                            text: "/$totalSlots",
                             style: TextStyle(
                               color: AppColors.gray,
                               fontSize: 14,
@@ -115,13 +127,16 @@ class StationDialog extends StatelessWidget {
           const SizedBox(height: 16),
 
           ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(
-                context,
+            onPressed: () async {
+              final navigator = Navigator.of(context);
+              navigator.pop();
+
+              await navigator.pushNamed(
                 '/station-details',
                 arguments: station,
               );
+
+              await onStationChanged?.call();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
