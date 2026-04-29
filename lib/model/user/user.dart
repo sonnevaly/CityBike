@@ -1,13 +1,16 @@
+import '../booking/booking.dart';
+import '../user_pass/user_pass.dart';
+
 class User {
   final String id;
   final String name;
-  final String email;
-  final String? activePassId;
+  final UserPass? activePass;
+  final List<Booking> bookings;
 
-  User({
+  const User({
     required this.id,
     required this.name,
-    required this.email,
-    this.activePassId,
+    this.activePass,
+    this.bookings = const [],
   });
 }

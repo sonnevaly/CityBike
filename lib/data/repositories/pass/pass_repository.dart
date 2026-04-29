@@ -6,5 +6,8 @@ abstract class PassRepository {
 
   Future<UserPass?> getActiveUserPass(String userId);
 
-  Future<UserPass> activatePass({required String userId, required Pass pass});
+  Future<UserPass> activatePass({
+    required String userId,
+    required Pass pass,
+  });
 }

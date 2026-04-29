@@ -68,10 +68,8 @@ class PassBottomButtons extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: vm.selectedPlan == null ? null : onActivate,
-            child: const Text(
-              'Activate Pass',
-              style: TextStyle(fontFamily: 'Outfit'),
-            ),
+            child: const Text('Activate Pass',
+                style: TextStyle(fontFamily: 'Outfit')),
           ),
         ),
       ],

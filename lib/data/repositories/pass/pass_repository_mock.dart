@@ -12,6 +12,12 @@ class PassRepositoryMock implements PassRepository {
     return [
       const Pass(id: 'day_pass', title: 'Day Pass', price: 5, durationDays: 1),
       const Pass(
+        id: 'weekly_pass',
+        title: 'Weekly Pass',
+        price: 12,
+        durationDays: 7,
+      ),
+      const Pass(
         id: 'monthly_pass',
         title: 'Monthly Pass',
         price: 25,

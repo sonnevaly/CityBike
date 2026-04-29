@@ -43,9 +43,7 @@ class PassRepositoryFirebase implements PassRepository {
     final userPassDto = UserPassDto.fromJson('user_pass_$userId', data);
 
     final passes = await getPasses();
-    final matchingPasses = passes.where(
-      (pass) => pass.id == userPassDto.passId,
-    );
+    final matchingPasses = passes.where((pass) => pass.id == userPassDto.passId);
     if (matchingPasses.isEmpty) return null;
 
     final userPass = userPassDto.toDomain(matchingPasses.first);

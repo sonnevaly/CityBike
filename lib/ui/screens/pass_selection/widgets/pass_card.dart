@@ -145,6 +145,8 @@ class PassCard extends StatelessWidget {
     switch (pass.durationDays) {
       case 1:
         return 'Perfect for a quick ride around the city';
+      case 7:
+        return 'Great for a full week of city rides';
       case 30:
         return 'Best value for commuters';
       case 365:

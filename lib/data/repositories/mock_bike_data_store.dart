@@ -4,73 +4,184 @@ import '../../model/station/station.dart';
 
 class MockBikeDataStore {
   static final Map<String, List<BikeSlot>> _slotsByStation = {
-    'station_1': [
+    'station_cadt': [
       const BikeSlot(
         id: 'slot_1',
         slotNumber: 1,
         status: SlotStatus.available,
-        bikeId: 'bike_1',
+        bikeId: 'bike_cadt_1',
       ),
       const BikeSlot(
         id: 'slot_2',
         slotNumber: 2,
         status: SlotStatus.available,
-        bikeId: 'bike_2',
+        bikeId: 'bike_cadt_2',
       ),
       const BikeSlot(id: 'slot_3', slotNumber: 3, status: SlotStatus.empty),
       const BikeSlot(
         id: 'slot_4',
         slotNumber: 4,
         status: SlotStatus.available,
-        bikeId: 'bike_3',
+        bikeId: 'bike_cadt_3',
+      ),
+      const BikeSlot(
+        id: 'slot_5',
+        slotNumber: 5,
+        status: SlotStatus.available,
+        bikeId: 'bike_cadt_4',
       ),
     ],
-    'station_2': [
+    'station_vattanac': [
       const BikeSlot(
         id: 'slot_1',
         slotNumber: 1,
         status: SlotStatus.available,
-        bikeId: 'bike_4',
+        bikeId: 'bike_vattanac_1',
       ),
       const BikeSlot(id: 'slot_2', slotNumber: 2, status: SlotStatus.empty),
       const BikeSlot(
         id: 'slot_3',
         slotNumber: 3,
         status: SlotStatus.available,
-        bikeId: 'bike_5',
+        bikeId: 'bike_vattanac_2',
+      ),
+      const BikeSlot(
+        id: 'slot_4',
+        slotNumber: 4,
+        status: SlotStatus.available,
+        bikeId: 'bike_vattanac_3',
       ),
     ],
-    'station_3': [
+    'station_exchange_square': [
       const BikeSlot(id: 'slot_1', slotNumber: 1, status: SlotStatus.empty),
-      const BikeSlot(id: 'slot_2', slotNumber: 2, status: SlotStatus.empty),
+      const BikeSlot(
+        id: 'slot_2',
+        slotNumber: 2,
+        status: SlotStatus.available,
+        bikeId: 'bike_exchange_1',
+      ),
+      const BikeSlot(
+        id: 'slot_3',
+        slotNumber: 3,
+        status: SlotStatus.available,
+        bikeId: 'bike_exchange_2',
+      ),
+      const BikeSlot(id: 'slot_4', slotNumber: 4, status: SlotStatus.empty),
+    ],
+    'station_royal_palace': [
+      const BikeSlot(
+        id: 'slot_1',
+        slotNumber: 1,
+        status: SlotStatus.available,
+        bikeId: 'bike_palace_1',
+      ),
+      const BikeSlot(
+        id: 'slot_2',
+        slotNumber: 2,
+        status: SlotStatus.available,
+        bikeId: 'bike_palace_2',
+      ),
+      const BikeSlot(id: 'slot_3', slotNumber: 3, status: SlotStatus.empty),
+      const BikeSlot(
+        id: 'slot_4',
+        slotNumber: 4,
+        status: SlotStatus.available,
+        bikeId: 'bike_palace_3',
+      ),
+    ],
+    'station_central_market': [
+      const BikeSlot(
+        id: 'slot_1',
+        slotNumber: 1,
+        status: SlotStatus.available,
+        bikeId: 'bike_market_1',
+      ),
+      const BikeSlot(
+        id: 'slot_2',
+        slotNumber: 2,
+        status: SlotStatus.available,
+        bikeId: 'bike_market_2',
+      ),
+      const BikeSlot(
+        id: 'slot_3',
+        slotNumber: 3,
+        status: SlotStatus.available,
+        bikeId: 'bike_market_3',
+      ),
+      const BikeSlot(id: 'slot_4', slotNumber: 4, status: SlotStatus.empty),
+    ],
+    'station_aeon_1': [
+      const BikeSlot(id: 'slot_1', slotNumber: 1, status: SlotStatus.empty),
+      const BikeSlot(
+        id: 'slot_2',
+        slotNumber: 2,
+        status: SlotStatus.available,
+        bikeId: 'bike_aeon_1',
+      ),
+      const BikeSlot(
+        id: 'slot_3',
+        slotNumber: 3,
+        status: SlotStatus.available,
+        bikeId: 'bike_aeon_2',
+      ),
+      const BikeSlot(
+        id: 'slot_4',
+        slotNumber: 4,
+        status: SlotStatus.available,
+        bikeId: 'bike_aeon_3',
+      ),
     ],
   };
 
   static List<Station> getStations() {
     return [
       Station(
-        id: 'station_1',
+        id: 'station_cadt',
         name: 'CADT Innovation Center',
-        address: 'Bridge 2, Prek Leap',
+        address: 'Bridge 2, National Road 6A, Phnom Penh',
         latitude: 11.6261,
         longitude: 104.9123,
-        slots: getSlots('station_1'),
+        slots: getSlots('station_cadt'),
       ),
       Station(
-        id: 'station_2',
+        id: 'station_vattanac',
         name: 'Vattanac Capital',
-        address: 'Monivong Blvd',
+        address: 'Monivong Boulevard, Phnom Penh',
         latitude: 11.5712,
         longitude: 104.9215,
-        slots: getSlots('station_2'),
+        slots: getSlots('station_vattanac'),
       ),
       Station(
-        id: 'station_3',
+        id: 'station_exchange_square',
         name: 'Exchange Square',
-        address: 'Street 106',
+        address: 'Street 106, Phnom Penh',
         latitude: 11.5745,
         longitude: 104.9230,
-        slots: getSlots('station_3'),
+        slots: getSlots('station_exchange_square'),
+      ),
+      Station(
+        id: 'station_royal_palace',
+        name: 'Royal Palace',
+        address: 'Samdach Sothearos Boulevard, Phnom Penh',
+        latitude: 11.5633,
+        longitude: 104.9310,
+        slots: getSlots('station_royal_palace'),
+      ),
+      Station(
+        id: 'station_central_market',
+        name: 'Central Market',
+        address: 'Kampuchea Krom Boulevard, Phnom Penh',
+        latitude: 11.5696,
+        longitude: 104.9210,
+        slots: getSlots('station_central_market'),
+      ),
+      Station(
+        id: 'station_aeon_1',
+        name: 'AEON Mall Phnom Penh',
+        address: 'Samdach Sothearos Boulevard, Phnom Penh',
+        latitude: 11.5469,
+        longitude: 104.9335,
+        slots: getSlots('station_aeon_1'),
       ),
     ];
   }
@@ -114,4 +225,3 @@ class MockBikeDataStore {
     return updatedSlot;
   }
 }
-

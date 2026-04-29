@@ -1,3 +1,5 @@
+import 'package:citybike/data/repositories/booking/booking_repository.dart';
+import 'package:citybike/data/repositories/booking/booking_repository_mock.dart';
 import 'package:citybike/data/repositories/pass/pass_repository.dart';
 import 'package:citybike/data/repositories/pass/pass_repository_mock.dart';
 import 'package:citybike/data/repositories/station/station_repository.dart';
@@ -10,11 +12,10 @@ import 'package:provider/provider.dart';
 
 List<InheritedProvider> get devProviders {
   return [
-
     Provider<StationRepository>(create: (_) => StationRepositoryMock()),
     Provider<PassRepository>(create: (_) => PassRepositoryMock()),
+    Provider<BookingRepository>(create: (_) => BookingRepositoryMock()),
 
-   
     ChangeNotifierProvider<UserState>(create: (_) => UserState()),
     ChangeNotifierProvider<PassState>(create: (_) => PassState()),
     ChangeNotifierProvider<StationState>(create: (_) => StationState()),
