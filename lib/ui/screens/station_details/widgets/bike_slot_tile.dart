@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:citybike/ui/theme/app_theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../model/bike/bike.dart';
+import '../../../../model/bike_slot/bike_slot.dart';
 import '../../../../model/enums.dart';
 
 class BikeSlotTile extends StatelessWidget {
@@ -18,7 +18,8 @@ class BikeSlotTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAvailable = slot.isAvailable;
+    final isAvailable =
+        slot.status == SlotStatus.available && slot.bikeId != null;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -168,13 +169,9 @@ class BikeSlotTile extends StatelessWidget {
   String get _bikeLabel {
     switch (slot.status) {
       case SlotStatus.available:
-        return slot.bikeType == BikeType.electric
-            ? 'Electric Bike'
-            : 'Standard Bike';
+        return 'Bike Slot ${slot.slotNumber}';
       case SlotStatus.empty:
-        return 'Empty Slot';
-      case SlotStatus.maintenance:
-        return 'Maintenance';
+        return 'Empty Slot ${slot.slotNumber}';
     }
   }
 
@@ -184,8 +181,6 @@ class BikeSlotTile extends StatelessWidget {
         return 'Available';
       case SlotStatus.empty:
         return 'Empty';
-      case SlotStatus.maintenance:
-        return 'Under Maintenance';
     }
   }
 }

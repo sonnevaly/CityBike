@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import '../../../../data/repositories/booking/booking_repository.dart';
 import '../../../../data/repositories/station/station_repository.dart';
-import '../../../../model/bike/bike.dart';
+import '../../../../model/bike_slot/bike_slot.dart';
 import '../../../../model/enums.dart';
 import '../../../../model/station/station.dart';
+import '../../../../model/user/user.dart';
 import '../../../states/user_state.dart';
 import '../../../states/pass_state.dart';
 import '../../../utils/async_value.dart';
 
 class StationDetailViewModel extends ChangeNotifier {
   final StationRepository _stationRepository;
+  final BookingRepository _bookingRepository;
   final UserState _userState;
   final PassState _passState;
   final Station station;
@@ -28,20 +31,23 @@ class StationDetailViewModel extends ChangeNotifier {
 
   bool get hasActivePass => _passState.isPassActive;
 
-  int get availableCount =>
-      _slots.data?.where((s) => s.isAvailable).length ?? 0;
+  int get availableCount {
+    return _slots.data?.where(_isSlotAvailable).length ?? 0;
+  }
 
-  int get totalSlots => station.totalSlots;
+  int get totalSlots => _slots.data?.length ?? station.slots.length;
 
   double get availabilityRatio =>
       totalSlots == 0 ? 0 : availableCount / totalSlots;
 
   StationDetailViewModel({
     required StationRepository stationRepository,
+    required BookingRepository bookingRepository,
     required UserState userState,
     required PassState passState,
     required this.station,
   })  : _stationRepository = stationRepository,
+        _bookingRepository = bookingRepository,
         _userState = userState,
         _passState = passState {
     loadSlots();
@@ -52,9 +58,8 @@ class StationDetailViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final bikes = await _stationRepository.getBikesForStation(station.id);
-      final slotList = _generateSlots(bikes);
-      _slots = AsyncValue.success(slotList);
+      final latestStation = await _stationRepository.getStationById(station.id);
+      _slots = AsyncValue.success(latestStation?.slots ?? station.slots);
     } catch (e) {
       _slots = AsyncValue.error(e.toString());
     }
@@ -62,33 +67,7 @@ class StationDetailViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<BikeSlot> _generateSlots(List<Bike> bikes) {
-    final List<BikeSlot> result = [];
-
-    for (int i = 0; i < totalSlots; i++) {
-      if (i < bikes.length) {
-        final bike = bikes[i];
-        result.add(BikeSlot(
-          slotNumber: i + 1,
-          bikeType: bike.type,
-          status: bike.isAvailable
-              ? SlotStatus.available
-              : SlotStatus.empty,
-        ));
-      } else {
-        result.add(BikeSlot(
-          slotNumber: i + 1,
-          bikeType: null,
-          status: SlotStatus.empty,
-        ));
-      }
-    }
-
-    return result;
-  }
-
   Future<bool> rentBike(BikeSlot slot) async {
-    // Block if already rented at this station
     if (_hasRented) {
       _errorMessage = 'You already rented a bike at this station.';
       notifyListeners();
@@ -101,13 +80,7 @@ class StationDetailViewModel extends ChangeNotifier {
       return false;
     }
 
-    // if (_userState.user == null) {
-    //   _errorMessage = 'You must be logged in to rent a bike.';
-    //   notifyListeners();
-    //   return false;
-    // }
-
-    if (!slot.isAvailable) {
+    if (!_isSlotAvailable(slot)) {
       _errorMessage = 'This slot is not available.';
       notifyListeners();
       return false;
@@ -118,12 +91,23 @@ class StationDetailViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _stationRepository.bookBike(
-        station.id,
-        slot.slotNumber,
-        '1'
+      final user = _userState.user ?? const User(id: 'user_1', name: 'Demo User');
+      final alreadyBooked = await _bookingRepository.hasActiveBookingAtStation(
+        userId: user.id,
+        stationId: station.id,
       );
-      _hasRented = true; //Mark as rented
+
+      if (alreadyBooked) {
+        _errorMessage = 'You already rented a bike at this station.';
+        return false;
+      }
+
+      await _bookingRepository.bookBike(
+        user: user,
+        station: station,
+        slot: slot,
+      );
+      _hasRented = true;
       await loadSlots();
       return true;
     } catch (e) {
@@ -134,5 +118,9 @@ class StationDetailViewModel extends ChangeNotifier {
       _isBooking = false;
       notifyListeners();
     }
+  }
+
+  bool _isSlotAvailable(BikeSlot slot) {
+    return slot.status == SlotStatus.available && slot.bikeId != null;
   }
 }
